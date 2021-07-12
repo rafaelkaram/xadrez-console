@@ -11,8 +11,16 @@
             this.tab = tab;
             this.qteMovimentos = 0;
         }
+        public void incrementarQteMovimentos() {
+            qteMovimentos++;
+        }
 
-       
+        public void decrementarQteMovimentos() {
+            qteMovimentos--;
+        }
+
+
+
 
         public bool existeMovimentosPossiveis() {
             bool[,] mat = movimentosPossiveis();
@@ -30,9 +38,6 @@
             return movimentosPossiveis()[pos.linha, pos.coluna];
         }
 
-        public void incrementarQteMovimentos() {
-            qteMovimentos++;
-        }
 
         public abstract bool[,] movimentosPossiveis();
     }
