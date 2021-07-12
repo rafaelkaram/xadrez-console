@@ -1,12 +1,12 @@
 ﻿using tabuleiro;
 
 namespace xadrez {
-    class Torre : Peca {
-        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor) {
+    class Dama : Peca {
+        public Dama(Tabuleiro tab, Cor cor) : base(tab, cor) {
         }
 
         public override string ToString() {
-            return "T";
+            return "D";
         }
 
         private bool podeMover(Posicao pos) {
@@ -42,7 +42,7 @@ namespace xadrez {
                     break;
                 }
 
-                pos.definirValores(pos.linha + 1, pos.coluna);
+                pos.definirValores(pos.linha+1, pos.coluna );
             }
 
             //direita
@@ -68,9 +68,60 @@ namespace xadrez {
                     break;
                 }
 
-                pos.definirValores(pos.linha, pos.coluna - 1);
+                pos.definirValores(pos.linha , pos.coluna - 1);
             }
 
+            //Noroeste
+            pos.definirValores(posicao.linha - 1, posicao.coluna - 1);
+            while (tab.posicaoValida(pos) && podeMover(pos))//enquanto for casa livre e posicao valida
+            {
+                mat[pos.linha, pos.coluna] = true;
+                if (tab.peca(pos) != null && tab.peca(pos).cor != cor) // se tiver uma peça e for da cor adversária
+                {
+                    break;
+                }
+
+                pos.definirValores(pos.linha - 1, pos.coluna - 1);
+            }
+
+            //Nordeste
+            pos.definirValores(posicao.linha - 1, posicao.coluna + 1);
+            while (tab.posicaoValida(pos) && podeMover(pos))//enquanto for casa livre e posicao valida
+            {
+                mat[pos.linha, pos.coluna] = true;
+                if (tab.peca(pos) != null && tab.peca(pos).cor != cor) // se tiver uma peça e for da cor adversária
+                {
+                    break;
+                }
+
+                pos.definirValores(pos.linha - 1, pos.coluna + 1);
+            }
+
+            //Sudeste
+            pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
+            while (tab.posicaoValida(pos) && podeMover(pos))//enquanto for casa livre e posicao valida
+            {
+                mat[pos.linha, pos.coluna] = true;
+                if (tab.peca(pos) != null && tab.peca(pos).cor != cor) // se tiver uma peça e for da cor adversária
+                {
+                    break;
+                }
+
+                pos.definirValores(pos.linha + 1, pos.coluna + 1);
+            }
+
+            //Sudoeste
+            pos.definirValores(posicao.linha + 1, posicao.coluna - 1);
+            while (tab.posicaoValida(pos) && podeMover(pos))//enquanto for casa livre e posicao valida
+            {
+                mat[pos.linha, pos.coluna] = true;
+                if (tab.peca(pos) != null && tab.peca(pos).cor != cor) // se tiver uma peça e for da cor adversária
+                {
+                    break;
+                }
+
+                pos.definirValores(pos.linha + 1, pos.coluna - 1);
+            }
 
             return mat;
 
